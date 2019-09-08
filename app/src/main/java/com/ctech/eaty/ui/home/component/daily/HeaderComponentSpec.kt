@@ -8,7 +8,6 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
@@ -25,7 +24,7 @@ object HeaderComponentSpec {
 
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): com.facebook.litho.Component {
         val controller = Fresco.newDraweeControllerBuilder()
                 .setUri(viewModel.userImageUrl)
                 .build()
@@ -65,7 +64,7 @@ object HeaderComponentSpec {
             c: ComponentContext,
             @Prop viewModel: ProductItemViewModel) {
 
-        val intent = UserActivity.newIntent(c, viewModel.user)
-        c.startActivity(intent)
+        val intent = UserActivity.newIntent(c.androidContext, viewModel.user)
+        c.androidContext.startActivity(intent)
     }
 }

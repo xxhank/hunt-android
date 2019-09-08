@@ -4,23 +4,14 @@ import android.graphics.Color
 import android.widget.LinearLayout
 import com.ctech.eaty.R
 import com.ctech.eaty.base.redux.Store
-import com.ctech.eaty.ui.home.component.daily.DailyProductsGroupSection
-import com.ctech.eaty.ui.home.component.daily.ProductComponent
 import com.ctech.eaty.ui.home.model.HorizontalProduct
-import com.ctech.eaty.ui.home.model.NewProducts
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.ctech.eaty.widget.recyclerview.HorizontalSpaceItemDecoration2
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
-import com.facebook.litho.annotations.FromEvent
-import com.facebook.litho.annotations.LayoutSpec
-import com.facebook.litho.annotations.OnCreateLayout
-import com.facebook.litho.annotations.OnEvent
-import com.facebook.litho.annotations.Prop
+import com.facebook.litho.annotations.*
 import com.facebook.litho.sections.SectionContext
-import com.facebook.litho.sections.annotations.GroupSectionSpec
 import com.facebook.litho.sections.common.DataDiffSection
 import com.facebook.litho.sections.common.OnCheckIsSameContentEvent
 import com.facebook.litho.sections.common.OnCheckIsSameItemEvent
@@ -28,10 +19,7 @@ import com.facebook.litho.sections.common.RenderEvent
 import com.facebook.litho.sections.widget.ListRecyclerConfiguration
 import com.facebook.litho.sections.widget.RecyclerCollectionComponent
 import com.facebook.litho.sections.widget.SectionBinderTarget
-import com.facebook.litho.widget.ComponentRenderInfo
-import com.facebook.litho.widget.RenderInfo
-import com.facebook.litho.widget.SolidColor
-import com.facebook.litho.widget.Text
+import com.facebook.litho.widget.*
 import com.facebook.yoga.YogaEdge
 
 
@@ -39,10 +27,10 @@ import com.facebook.yoga.YogaEdge
 object NewProductsComponentSpec {
 
     private val LIST_CONFIGURATION: ListRecyclerConfiguration<SectionBinderTarget> =
-            ListRecyclerConfiguration(LinearLayout.HORIZONTAL, false, ListRecyclerConfiguration.SNAP_TO_CENTER)
+            ListRecyclerConfiguration(LinearLayout.HORIZONTAL, false, SnapUtil.SNAP_TO_CENTER)
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop products: HorizontalProduct): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop products: HorizontalProduct): com.facebook.litho.Component {
         return Column.create(c)
                 .child(
                         Text.create(c, 0, R.style.Text_Body2)

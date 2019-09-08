@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.ctech.eaty.ui.upcomingdetail.viewmodel.MessageViewModel
 import com.ctech.eaty.ui.upcomingdetail.viewmodel.MessageViewModel.Companion.TYPE_DEFAULT
-import com.ctech.eaty.ui.upcomingdetail.viewmodel.MessageViewModel.Companion.TYPE_EXTENDED
 import com.ctech.eaty.widget.social.OnLinkClickListener
 
 typealias OnEmailSubmitListener = (String) -> Unit
@@ -27,13 +26,12 @@ class MessageAdapter : RecyclerView.Adapter<MessageViewHolder>() {
         }
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): MessageViewHolder? {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): MessageViewHolder {
         if (type == TYPE_DEFAULT) {
             return MessageViewHolder.create(viewGroup)
-        } else if (type == TYPE_EXTENDED) {
+        } else /*if (type == TYPE_EXTENDED)*/ {
             return MessageExtendedViewHolder.create(viewGroup)
         }
-        return null
     }
 
     override fun onViewRecycled(holder: MessageViewHolder) {

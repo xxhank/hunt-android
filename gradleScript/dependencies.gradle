@@ -1,6 +1,6 @@
 def versions = [
         support    : '27.0.2',
-        litho      : '0.11.0',
+        litho      : '0.22.0',
         autodispose: '0.5.1',
         firebase   : '11.4.2'
 ]
@@ -15,13 +15,13 @@ def build = [
 ]
 
 def support = [
-        appcompat   : "com.android.support:appcompat-v7:${versions.support}",
-        multidex    : "com.android.support:multidex:1.0.1",
-        design      : "com.android.support:design:${versions.support}",
-        customtab   : "com.android.support:customtabs:${versions.support}",
-        palette     : "com.android.support:palette-v7:${versions.support}",
-        annotation  : "com.android.support:support-annotations:${versions.support}",
-        constraint  : 'com.android.support.constraint:constraint-layout:1.0.2'
+        appcompat : "com.android.support:appcompat-v7:${versions.support}",
+        multidex  : "com.android.support:multidex:1.0.1",
+        design    : "com.android.support:design:${versions.support}",
+        customtab : "com.android.support:customtabs:${versions.support}",
+        palette   : "com.android.support:palette-v7:${versions.support}",
+        annotation: "com.android.support:support-annotations:${versions.support}",
+        constraint: 'com.android.support.constraint:constraint-layout:1.0.2'
 ]
 
 def dagger = [
@@ -120,7 +120,7 @@ def litho = [
         "widget"           : "com.facebook.litho:litho-widget:${versions.litho}",
         "annotation"       : "com.facebook.litho:litho-annotations:${versions.litho}",
         "processor"        : "com.facebook.litho:litho-processor:${versions.litho}",
-        "loader"           : 'com.facebook.soloader:soloader:0.2.0',
+        "loader"           : 'com.facebook.soloader:soloader:0.5.1',
         "fresco"           : "com.facebook.litho:litho-fresco:${versions.litho}",
         "test"             : "com.facebook.litho:litho-testing:${versions.litho}",
         "sectionCore"      : "com.facebook.litho:litho-sections-core:${versions.litho}",

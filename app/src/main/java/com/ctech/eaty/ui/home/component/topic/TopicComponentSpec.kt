@@ -12,7 +12,6 @@ import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.OnEvent
@@ -25,7 +24,7 @@ import com.facebook.yoga.YogaEdge
 object TopicComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: Topic): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: Topic): com.facebook.litho.Component {
         val height = c.resources.getDimensionPixelSize(R.dimen.feed_horizontal_product_height)
         val controller = Fresco.newDraweeControllerBuilder()
                 .setImageRequest(ImageRequest.fromUri(ResizeImageUrlProvider.overrideUrl(viewModel.imageUrl, height / 2)))
@@ -37,7 +36,7 @@ object TopicComponentSpec {
 
                         FrescoImage
                                 .create(c)
-                                .progressBarImage(CircleProgressBarDrawable(c))
+                                .progressBarImage(CircleProgressBarDrawable(c.androidContext))
                                 .controller(controller)
                                 .actualImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE)
                                 .heightRes(R.dimen.feed_topic_height)
@@ -62,7 +61,7 @@ object TopicComponentSpec {
             c: ComponentContext,
             @Prop viewModel: Topic) {
 
-        val intent = TopicDetailActivity.newIntent(c, viewModel)
-        c.startActivity(intent)
+        val intent = TopicDetailActivity.newIntent(c.androidContext, viewModel)
+        c.androidContext.startActivity(intent)
     }
 }

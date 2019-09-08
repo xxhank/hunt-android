@@ -5,7 +5,6 @@ import com.ctech.eaty.R
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
@@ -19,7 +18,7 @@ import com.facebook.yoga.YogaJustify
 object FooterComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): com.facebook.litho.Component {
         val resources = c.resources
         val interaction = Row.create(c)
                 .child(
@@ -50,7 +49,7 @@ object FooterComponentSpec {
             builder.child(interaction)
         }
 
-        builder.backgroundColor(ContextCompat.getColor(c, R.color.white_100))
+        builder.backgroundColor(ContextCompat.getColor(c.androidContext, R.color.white_100))
                 .child(
                         SolidColor.create(c)
                                 .colorRes(R.color.divider_color)

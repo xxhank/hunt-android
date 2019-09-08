@@ -44,9 +44,10 @@ object HorizontalAdsSectionSpec {
             c: SectionContext,
             @FromEvent model: HorizontalAdsItemViewModel): RenderInfo {
         return ViewRenderInfo.create()
-                .viewCreator { context ->
-                    return@viewCreator HorizontalAdsView(context)
-                }
+                .viewCreator { c, parent -> return@viewCreator HorizontalAdsView(c) }
+//                .viewCreator { (context) ->
+//                    return@viewCreator HorizontalAdsView(context)
+//                }
                 .viewBinder(object : SimpleViewBinder<HorizontalAdsView>() {
                     override fun bind(adsView: HorizontalAdsView) {
                         val adsManager = NativeAdsManager(adsView.context, model.adId, 5)

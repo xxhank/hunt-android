@@ -7,7 +7,6 @@ import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.Prop
@@ -19,7 +18,7 @@ object ProductComponentSpec {
 
     @OnCreateLayout
     fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel,
-                       @Prop store: Store<HomeState>): ComponentLayout {
+                       @Prop store: Store<HomeState>): com.facebook.litho.Component {
         return Column.create(c)
                 .child(HeaderComponent.create(c)
                         .viewModel(viewModel))

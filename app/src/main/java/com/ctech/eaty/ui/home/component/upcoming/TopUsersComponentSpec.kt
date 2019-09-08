@@ -6,7 +6,6 @@ import com.ctech.eaty.entity.User
 import com.ctech.eaty.util.ResizeImageUrlProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
@@ -19,7 +18,7 @@ import com.facebook.yoga.YogaEdge
 object TopUsersComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop users: List<User>): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop users: List<User>): com.facebook.litho.Component {
 
 
         val size = c.resources.getDimensionPixelSize(R.dimen.top_user_avatar_size)
@@ -27,7 +26,7 @@ object TopUsersComponentSpec {
         val builder = Row
                 .create(c)
 
-        users.take(3).forEachIndexed { _ , user ->
+        users.take(3).forEachIndexed { _, user ->
 
             val controller = Fresco.newDraweeControllerBuilder()
                     .setUri(ResizeImageUrlProvider.overrideUrl(user.imageUrl.px64, size))

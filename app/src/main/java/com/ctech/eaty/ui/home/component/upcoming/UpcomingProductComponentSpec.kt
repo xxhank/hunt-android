@@ -17,7 +17,6 @@ import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
@@ -36,7 +35,7 @@ object UpcomingProductComponentSpec {
 
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: UpcomingProductItemProps, @Prop store: Store<HomeState>): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: UpcomingProductItemProps, @Prop store: Store<HomeState>): com.facebook.litho.Component {
         val backgroundSize = c.resources.getDimensionPixelSize(R.dimen.upcoming_product_height)
         val foregroundSize = c.resources.getDimensionPixelSize(R.dimen.upcoming_foreground_product_size)
 
@@ -57,16 +56,16 @@ object UpcomingProductComponentSpec {
         val body = if (viewModel.saveMode) {
             DataSaverComponent.create(c)
                     .store(store)
-                    .buildWithLayout()
+                    .build()
         } else {
             Column.create(c)
                     .child(
                             FrescoImage
                                     .create(c)
-                                    .progressBarImage(CircleProgressBarDrawable(c))
+                                    .progressBarImage(CircleProgressBarDrawable(c.androidContext))
                                     .controller(controller)
                                     .actualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP)
-                                    .widthPx(ViewUtils.getScreenWidth(c) * 2 / 3)
+                                    .widthPx(ViewUtils.getScreenWidth(c.androidContext) * 2 / 3)
                                     .heightPx(backgroundSize)
                     )
                     .child(
@@ -126,7 +125,7 @@ object UpcomingProductComponentSpec {
                                 .backgroundRes(R.color.white_100)
 
                 )
-                .widthPx(ViewUtils.getScreenWidth(c) * 2 / 3)
+                .widthPx(ViewUtils.getScreenWidth(c.androidContext) * 2 / 3)
                 .clickHandler(DailyProductBodyComponent.onClick(c))
                 .build()
     }
@@ -137,8 +136,8 @@ object UpcomingProductComponentSpec {
             c: ComponentContext,
             @Prop viewModel: UpcomingProductItemProps) {
 
-        val intent = UpcomingProductDetailActivity.newIntent(c, viewModel.id)
-        c.startActivity(intent)
+        val intent = UpcomingProductDetailActivity.newIntent(c.androidContext, viewModel.id)
+        c.androidContext.startActivity(intent)
 
     }
 }

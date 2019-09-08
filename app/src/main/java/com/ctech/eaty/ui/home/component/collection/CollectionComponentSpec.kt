@@ -17,12 +17,7 @@ import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
-import com.facebook.litho.annotations.FromEvent
-import com.facebook.litho.annotations.LayoutSpec
-import com.facebook.litho.annotations.OnCreateLayout
-import com.facebook.litho.annotations.OnEvent
-import com.facebook.litho.annotations.Prop
+import com.facebook.litho.annotations.*
 import com.facebook.litho.fresco.FrescoImage
 import com.facebook.litho.sections.SectionContext
 import com.facebook.litho.sections.common.DataDiffSection
@@ -32,10 +27,7 @@ import com.facebook.litho.sections.common.RenderEvent
 import com.facebook.litho.sections.widget.ListRecyclerConfiguration
 import com.facebook.litho.sections.widget.RecyclerCollectionComponent
 import com.facebook.litho.sections.widget.SectionBinderTarget
-import com.facebook.litho.widget.ComponentRenderInfo
-import com.facebook.litho.widget.RenderInfo
-import com.facebook.litho.widget.SolidColor
-import com.facebook.litho.widget.Text
+import com.facebook.litho.widget.*
 import com.facebook.yoga.YogaEdge
 import com.facebook.yoga.YogaPositionType
 
@@ -43,10 +35,10 @@ import com.facebook.yoga.YogaPositionType
 object CollectionComponentSpec {
 
     private val LIST_CONFIGURATION: ListRecyclerConfiguration<SectionBinderTarget> =
-            ListRecyclerConfiguration(LinearLayout.HORIZONTAL, false, ListRecyclerConfiguration.SNAP_NONE)
+            ListRecyclerConfiguration(LinearLayout.HORIZONTAL, false, SnapUtil.SNAP_NONE)
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop collection: SuggestedCollection): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop collection: SuggestedCollection): com.facebook.litho.Component {
 
         val width = c.resources.getDimensionPixelSize(R.dimen.upcoming_product_width)
         val controller = Fresco.newDraweeControllerBuilder()
@@ -59,7 +51,7 @@ object CollectionComponentSpec {
                                 .child(
                                         FrescoImage
                                                 .create(c)
-                                                .progressBarImage(CircleProgressBarDrawable(c))
+                                                .progressBarImage(CircleProgressBarDrawable(c.androidContext))
                                                 .controller(controller)
                                                 .actualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP)
                                                 .foregroundRes(R.color.black_60)
@@ -72,7 +64,7 @@ object CollectionComponentSpec {
                                                 .textAlignment(Layout.Alignment.ALIGN_CENTER)
                                                 .positionType(YogaPositionType.ABSOLUTE)
                                                 .positionRes(YogaEdge.TOP, R.dimen.space_medium)
-                                                .textColor(ContextCompat.getColor(c, R.color.white_100))
+                                                .textColor(ContextCompat.getColor(c.androidContext, R.color.white_100))
                                                 .positionRes(YogaEdge.LEFT, R.dimen.content_padding_horizontal)
                                                 .positionRes(YogaEdge.RIGHT, R.dimen.content_padding_horizontal)
                                 )
@@ -82,7 +74,7 @@ object CollectionComponentSpec {
                                                 .textAlignment(Layout.Alignment.ALIGN_CENTER)
                                                 .positionType(YogaPositionType.ABSOLUTE)
                                                 .positionRes(YogaEdge.TOP, R.dimen.space_xlarge)
-                                                .textColor(ContextCompat.getColor(c, R.color.white_100))
+                                                .textColor(ContextCompat.getColor(c.androidContext, R.color.white_100))
                                                 .positionRes(YogaEdge.LEFT, R.dimen.content_padding_horizontal)
                                                 .positionRes(YogaEdge.RIGHT, R.dimen.content_padding_horizontal)
                                 )
@@ -117,8 +109,8 @@ object CollectionComponentSpec {
             c: ComponentContext,
             @Prop collection: SuggestedCollection) {
 
-        val intent = CollectionDetailActivity.newIntent(c, collection.id.toInt())
-        c.startActivity(intent)
+        val intent = CollectionDetailActivity.newIntent(c.androidContext, collection.id.toInt())
+        c.androidContext.startActivity(intent)
     }
 
     @OnEvent(RenderEvent::class)

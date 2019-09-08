@@ -7,12 +7,10 @@ import android.widget.FrameLayout
 import com.ctech.eaty.R
 import com.ctech.eaty.util.setPaddingBottom
 import com.facebook.ads.AdError
-import com.facebook.ads.NativeAd
 import com.facebook.ads.NativeAdScrollView
 import com.facebook.ads.NativeAdView
 import com.facebook.ads.NativeAdsManager
-import kotlinx.android.synthetic.main.item_horizontal_ads.view.flAdsContainer
-import kotlinx.android.synthetic.main.item_horizontal_ads.view.progressBar
+import kotlinx.android.synthetic.main.item_horizontal_ads.view.*
 import timber.log.Timber
 
 class HorizontalAdsView(context: Context) : FrameLayout(context) {
@@ -40,7 +38,7 @@ class HorizontalAdsView(context: Context) : FrameLayout(context) {
             }
         })
 
-        adsManager.loadAds(NativeAd.MediaCacheFlag.ALL)
+        // adsManager.loadAds(NativeAd.MediaCacheFlag.ALL)
 
         if (!adsManager.isLoaded) {
             progressBar.visibility = View.VISIBLE

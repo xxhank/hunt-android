@@ -1,5 +1,6 @@
 package com.ctech.eaty.base
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.support.multidex.MultiDexApplication
 import android.util.Log
@@ -89,12 +90,13 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
 
     private fun setupRealm() {
         Realm.init(this)
-        val config =  RealmConfiguration.Builder()
+        val config = RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()
                 .build()
         Realm.setDefaultConfiguration(config)
     }
 
+    @SuppressLint("CheckResult")
     private fun monitorNetworkState() {
         networkController
                 .observeNetworkConnectivity()
@@ -123,6 +125,4 @@ class EatyApplication : MultiDexApplication(), HasActivityInjector {
         Fresco.initialize(this, pipelineConfig)
 
     }
-
-
 }

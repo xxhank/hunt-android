@@ -11,7 +11,6 @@ import com.facebook.litho.Border
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.OnEvent
@@ -27,7 +26,7 @@ import com.facebook.yoga.YogaJustify
 object DataSaverComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext): com.facebook.litho.Component {
 
         return Column.create(c)
                 .child(
@@ -54,11 +53,11 @@ object DataSaverComponentSpec {
                                 .paddingRes(YogaEdge.LEFT, R.dimen.space_medium)
                                 .paddingRes(YogaEdge.RIGHT, R.dimen.space_medium)
                                 .textStyle(BOLD)
-                                .textColor(ContextCompat.getColor(c, R.color.colorPrimary))
+                                .textColor(ContextCompat.getColor(c.androidContext, R.color.colorPrimary))
                                 .border(
                                         Border.create(c)
                                                 .widthRes(YogaEdge.ALL, R.dimen.border_width)
-                                                .color(YogaEdge.ALL, ContextCompat.getColor(c, R.color.colorPrimary))
+                                                .color(YogaEdge.ALL, ContextCompat.getColor(c.androidContext, R.color.colorPrimary))
                                                 .cornerEffect(c.resources.getDimensionPixelSize(R.dimen.button_radius).toFloat())
                                                 .build()
 
@@ -67,7 +66,7 @@ object DataSaverComponentSpec {
                 )
                 .alignItems(YogaAlign.CENTER)
                 .justifyContent(YogaJustify.CENTER)
-                .backgroundColor(ContextCompat.getColor(c, R.color.gray_50))
+                .backgroundColor(ContextCompat.getColor(c.androidContext, R.color.gray_50))
                 .heightRes(R.dimen.data_saver_height)
                 .build()
     }
@@ -76,12 +75,12 @@ object DataSaverComponentSpec {
     @OnEvent(ClickEvent::class)
     fun onClick(
             c: ComponentContext, @Prop store: Store<HomeState>) {
-        AlertDialog.Builder(c)
+        AlertDialog.Builder(c.androidContext)
                 .setMessage(c.getString(R.string.data_saver_confirm))
-                .setPositiveButton(c.getString(android.R.string.ok), { dialog, _ ->
+                .setPositiveButton(c.getString(android.R.string.ok)) { dialog, _ ->
                     store.dispatch(HomeAction.USE_MOBILE_DATA)
                     dialog.dismiss()
-                })
+                }
                 .setNegativeButton(c.getString(android.R.string.no)) { dialog, _ ->
                     dialog.dismiss()
                 }.create()

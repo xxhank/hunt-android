@@ -5,7 +5,6 @@ import com.ctech.eaty.base.redux.Store
 import com.ctech.eaty.ui.home.model.HomeFeed
 import com.ctech.eaty.ui.home.state.HomeState
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.Prop
@@ -23,7 +22,7 @@ object HomeListComponentSpec {
     fun onCreateLayout(c: ComponentContext,
                        @Prop dataSource: List<HomeFeed>,
                        @Prop store: Store<HomeState>,
-                       @Prop eventsController: RecyclerCollectionEventsController): ComponentLayout {
+                       @Prop eventsController: RecyclerCollectionEventsController): com.facebook.litho.Component {
         return RecyclerCollectionComponent.create(c)
                 .section(
                         HomeFeedSection.create(SectionContext(c))
@@ -34,7 +33,7 @@ object HomeListComponentSpec {
                 .refreshProgressBarColorRes(R.color.colorAccent)
                 .disablePTR(false)
                 .testKey(MAIN_SCREEN)
-                .buildWithLayout()
+                .build()
     }
 
 }

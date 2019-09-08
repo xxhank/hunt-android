@@ -5,7 +5,6 @@ import com.ctech.eaty.R
 import com.ctech.eaty.ui.home.viewmodel.StickyItemViewModel
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.Prop
@@ -17,7 +16,7 @@ import com.facebook.yoga.YogaEdge
 object StickyLabelComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: StickyItemViewModel): ComponentLayout =
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: StickyItemViewModel): com.facebook.litho.Component =
             Column.create(c)
                     .backgroundColor(Color.WHITE)
                     .paddingRes(YogaEdge.BOTTOM, R.dimen.content_padding_vertical)

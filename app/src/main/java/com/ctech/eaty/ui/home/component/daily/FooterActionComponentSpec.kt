@@ -6,7 +6,6 @@ import com.ctech.eaty.ui.comment.view.CommentActivity
 import com.ctech.eaty.ui.home.viewmodel.ProductItemViewModel
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
@@ -25,7 +24,7 @@ object FooterActionComponentSpec {
     @OnCreateLayout
     fun onCreateLayout(c: ComponentContext,
                        @Prop actionResId: Int,
-                       @Prop actionLabelResId: Int): ComponentLayout {
+                       @Prop actionLabelResId: Int): com.facebook.litho.Component {
         return Row.create(c)
                 .child(
                         Image.create(c)
@@ -57,14 +56,14 @@ object FooterActionComponentSpec {
 
         when (actionResId) {
             R.drawable.ic_comment -> {
-                val intent = CommentActivity.newIntent(c, viewModel.id)
-                c.startActivity(intent)
+                val intent = CommentActivity.newIntent(c.androidContext, viewModel.id)
+                c.androidContext.startActivity(intent)
             }
             R.drawable.ic_share_home -> {
                 val shareIntent = Intent(Intent.ACTION_SEND)
                 shareIntent.type = "text/plain"
                 shareIntent.putExtra(Intent.EXTRA_TEXT, viewModel.discussUrl)
-                c.startActivity(Intent.createChooser(shareIntent, "Share link using"))
+                c.androidContext.startActivity(Intent.createChooser(shareIntent, "Share link using"))
             }
 
         }

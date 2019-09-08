@@ -14,7 +14,6 @@ import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.OnEvent
@@ -29,7 +28,7 @@ object DailyProductBodyComponentSpec {
 
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel, @Prop store: Store<HomeState>): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel, @Prop store: Store<HomeState>): com.facebook.litho.Component {
         val height = c.resources.getDimensionPixelSize(R.dimen.feed_product_height)
         val controller = Fresco.newDraweeControllerBuilder()
                 .setLowResImageRequest(ImageRequest.fromUri(ResizeImageUrlProvider.overrideUrl(viewModel.imageUrl, c.resources.getDimensionPixelSize(R.dimen.thumbnail_preview_size))))
@@ -45,7 +44,7 @@ object DailyProductBodyComponentSpec {
         } else {
             FrescoImage
                     .create(c)
-                    .progressBarImage(CircleProgressBarDrawable(c))
+                    .progressBarImage(CircleProgressBarDrawable(c.androidContext))
                     .controller(controller)
                     .actualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP)
                     .heightPx(height)
@@ -74,7 +73,7 @@ object DailyProductBodyComponentSpec {
             c: ComponentContext,
             @Prop viewModel: ProductItemViewModel) {
 
-        val intent = ProductDetailActivity.newIntent(c, viewModel.id)
-        c.startActivity(intent)
+        val intent = ProductDetailActivity.newIntent(c.androidContext, viewModel.id)
+        c.androidContext.startActivity(intent)
     }
 }

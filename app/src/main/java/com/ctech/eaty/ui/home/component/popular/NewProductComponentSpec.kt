@@ -13,7 +13,6 @@ import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
@@ -29,7 +28,7 @@ object NewProductComponentSpec {
     @OnCreateLayout
     fun onCreateLayout(c: ComponentContext,
                        @Prop viewModel: ProductItemViewModel,
-                       @Prop store: Store<HomeState>): ComponentLayout {
+                       @Prop store: Store<HomeState>): com.facebook.litho.Component {
 
         val resources = c.resources
         val height = c.resources.getDimensionPixelSize(R.dimen.feed_horizontal_product_height)
@@ -47,7 +46,7 @@ object NewProductComponentSpec {
         } else {
             FrescoImage
                     .create(c)
-                    .progressBarImage(CircleProgressBarDrawable(c))
+                    .progressBarImage(CircleProgressBarDrawable(c.androidContext))
                     .backgroundRes(R.color.white_100)
                     .controller(controller)
                     .actualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP)

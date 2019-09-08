@@ -12,7 +12,6 @@ import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
@@ -27,7 +26,7 @@ import com.facebook.yoga.YogaJustify
 object CollectionProductComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: ProductItemViewModel): com.facebook.litho.Component {
 
         val height = c.resources.getDimensionPixelSize(R.dimen.feed_job_size)
         val controller = Fresco.newDraweeControllerBuilder()
@@ -40,7 +39,7 @@ object CollectionProductComponentSpec {
 
                         FrescoImage
                                 .create(c)
-                                .progressBarImage(CircleProgressBarDrawable(c))
+                                .progressBarImage(CircleProgressBarDrawable(c.androidContext))
                                 .controller(controller)
                                 .actualImageScaleType(ScalingUtils.ScaleType.FIT_XY)
                                 .heightRes(R.dimen.collection_product_height)
@@ -78,7 +77,7 @@ object CollectionProductComponentSpec {
             c: ComponentContext,
             @Prop viewModel: ProductItemViewModel) {
 
-        val intent = ProductDetailActivity.newIntent(c, viewModel.id)
-        c.startActivity(intent)
+        val intent = ProductDetailActivity.newIntent(c.androidContext, viewModel.id)
+        c.androidContext.startActivity(intent)
     }
 }

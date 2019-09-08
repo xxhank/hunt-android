@@ -25,7 +25,6 @@ android {
     compileSdkVersion deps.build.compileSdkVersion
     buildToolsVersion deps.build.buildToolsVersion
 
-
     defaultConfig {
         applicationId "com.ctech.eaty"
         minSdkVersion deps.build.minSdkVersion
@@ -148,7 +147,7 @@ dependencies {
 
     implementation deps.glide.lib
     kapt deps.glide.compiler
-    
+
     implementation deps.jsoup
 
     //Caching
@@ -215,9 +214,6 @@ dependencies {
         exclude group: 'com.facebook.yoga', module: 'yoga'
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:2.0.1'
     }
-
-
-
 }
 
 apply plugin: 'com.google.gms.google-services'

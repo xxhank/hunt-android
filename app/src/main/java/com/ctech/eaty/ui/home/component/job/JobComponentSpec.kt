@@ -16,7 +16,6 @@ import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
 import com.facebook.litho.Row
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
@@ -33,7 +32,7 @@ import com.facebook.yoga.YogaJustify
 object JobComponentSpec {
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop viewModel: Job): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop viewModel: Job): com.facebook.litho.Component {
 
         val height = c.resources.getDimensionPixelSize(R.dimen.feed_job_size)
         val controller = Fresco.newDraweeControllerBuilder()
@@ -46,7 +45,7 @@ object JobComponentSpec {
 
                         FrescoImage
                                 .create(c)
-                                .progressBarImage(CircleProgressBarDrawable(c))
+                                .progressBarImage(CircleProgressBarDrawable(c.androidContext))
                                 .controller(controller)
                                 .actualImageScaleType(ScalingUtils.ScaleType.CENTER_INSIDE)
                                 .heightRes(R.dimen.feed_job_size)
@@ -84,9 +83,9 @@ object JobComponentSpec {
             @Prop viewModel: Job) {
 
         val intentBuilder = CustomTabsIntent.Builder(null)
-        intentBuilder.setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
-        intentBuilder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-        intentBuilder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
-        CustomTabActivityHelper.openCustomTab(context, intentBuilder.build(), Uri.parse(viewModel.url), WebviewFallback())
+        intentBuilder.setStartAnimations(context.androidContext, R.anim.slide_in_right, R.anim.slide_out_left)
+        intentBuilder.setExitAnimations(context.androidContext, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+        intentBuilder.setToolbarColor(ContextCompat.getColor(context.androidContext, R.color.colorPrimary))
+        CustomTabActivityHelper.openCustomTab(context.androidContext, intentBuilder.build(), Uri.parse(viewModel.url), WebviewFallback())
     }
 }

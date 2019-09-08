@@ -4,30 +4,24 @@ import android.graphics.Color
 import android.widget.LinearLayout
 import com.ctech.eaty.R
 import com.ctech.eaty.base.redux.Store
-import com.ctech.eaty.ui.home.component.StickyLabelComponent
 import com.ctech.eaty.ui.home.model.UpcomingProducts
 import com.ctech.eaty.ui.home.state.HomeState
 import com.ctech.eaty.ui.home.viewmodel.UpcomingProductItemProps
 import com.ctech.eaty.widget.recyclerview.HorizontalSpaceItemDecoration2
 import com.facebook.litho.Column
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.ComponentLayout
-import com.facebook.litho.annotations.FromEvent
-import com.facebook.litho.annotations.LayoutSpec
-import com.facebook.litho.annotations.OnCreateLayout
-import com.facebook.litho.annotations.OnEvent
-import com.facebook.litho.annotations.Prop
+import com.facebook.litho.annotations.*
 import com.facebook.litho.sections.SectionContext
 import com.facebook.litho.sections.common.DataDiffSection
 import com.facebook.litho.sections.common.OnCheckIsSameContentEvent
 import com.facebook.litho.sections.common.OnCheckIsSameItemEvent
 import com.facebook.litho.sections.common.RenderEvent
 import com.facebook.litho.sections.widget.ListRecyclerConfiguration
-import com.facebook.litho.sections.widget.ListRecyclerConfiguration.SNAP_TO_CENTER
 import com.facebook.litho.sections.widget.RecyclerCollectionComponent
 import com.facebook.litho.sections.widget.SectionBinderTarget
 import com.facebook.litho.widget.ComponentRenderInfo
 import com.facebook.litho.widget.RenderInfo
+import com.facebook.litho.widget.SnapUtil.SNAP_TO_CENTER
 import com.facebook.litho.widget.SolidColor
 import com.facebook.litho.widget.Text
 import com.facebook.yoga.YogaEdge
@@ -40,7 +34,7 @@ object UpcomingProductsComponentSpec {
             ListRecyclerConfiguration(LinearLayout.HORIZONTAL, false, SNAP_TO_CENTER)
 
     @OnCreateLayout
-    fun onCreateLayout(c: ComponentContext, @Prop products: UpcomingProducts): ComponentLayout {
+    fun onCreateLayout(c: ComponentContext, @Prop products: UpcomingProducts): com.facebook.litho.Component {
         return Column.create(c)
                 .child(
                         Text.create(c, 0, R.style.Text_Body2)

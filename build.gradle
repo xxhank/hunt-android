@@ -9,6 +9,7 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         jcenter()
+        google()
     }
 
     dependencies {
@@ -37,6 +38,7 @@ allprojects {
         maven { url 'https://maven.fabric.io/public' }
         maven { url "$rootDir/app/src/main/js/node_modules/react-native/android" }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+        google()
     }
 }
 
@@ -45,24 +47,23 @@ task clean(type: Delete) {
 }
 
 
-apply plugin: 'com.uber.okbuck'
+//apply plugin: 'com.uber.okbuck'
 
-project.ext.preDexLibraries = !deps.build.ci
-
-subprojects {
-    project.plugins.whenPluginAdded { plugin ->
-        if ("com.android.build.gradle.AppPlugin" == plugin.class.name) {
-            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibraries
-        } else if ("com.android.build.gradle.LibraryPlugin" == plugin.class.name) {
-            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibraries
-        }
-    }
-
-    tasks.create("buildCheck") {
-        dependsOn 'findbugs'
-        dependsOn 'lint'
-        dependsOn 'pmd'
-        dependsOn 'testCoverage'
-    }
-
-}
+//project.ext.preDexLibraries = !deps.build.ci
+//
+//subprojects {
+//    project.plugins.whenPluginAdded { plugin ->
+//        if ("com.android.build.gradle.AppPlugin" == plugin.class.name) {
+//            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibraries
+//        } else if ("com.android.build.gradle.LibraryPlugin" == plugin.class.name) {
+//            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibraries
+//        }
+//    }
+//
+//    tasks.create("buildCheck") {
+//        dependsOn 'findbugs'
+//        dependsOn 'lint'
+//        dependsOn 'pmd'
+//        dependsOn 'testCoverage'
+//    }
+//}
